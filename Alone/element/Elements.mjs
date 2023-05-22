@@ -1,16 +1,20 @@
-export function newElement(message="",type="span"){
-    const element = document.createElement(type);
-    element.append(message);
+export function newElement({ message = "", style = "" }, tagName = "span") {
+    const element = document.createElement(tagName);
+    if (message) element.append(message);
+    if (style) element.style.cssText = style;
     return element;
 }
 
 
 
-export function newElementsCollection(elements=[],type="div"){
-    if(typeof elements !==  "object") throw Error("newElementCollection only support array of elements");
-    const collectionElement = document.createElement(type);
-    elements.forEach(newElement => {
-        collectionElement.append(newElement);
-    });
+export function newElementsCollection({ elements = [], collectionStyle = "" }, tagName = "div") {
+    if(typeof elements !== "object") throw Error("newElementCollection only support array");
+    const collectionElement = document.createElement(tagName);
+    if (elements) {
+        elements.forEach(newElement => {
+            collectionElement.append(newElement);
+        });
+    }
+    if (collectionElement) collectionElement.style.cssText = collectionElement;
     return collectionElement;
 }
